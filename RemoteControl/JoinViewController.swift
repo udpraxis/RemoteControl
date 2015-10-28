@@ -44,6 +44,7 @@ class JoinViewController: UIViewController {
             self.join_btn.hidden = true
             self.disconnect.hidden = false
             
+            
         }
         else{
             status?.text = " Not Connected"
