@@ -39,10 +39,13 @@ class JoinViewController: UIViewController {
     mainBrain.starttcpConnection(address:stringChecking(ip_address.text!) ,Port:stringtoInt(port_input.text!) )
         if mainBrain.isConnected{
             self.status.hidden = false
+            mainBrain.firstVerification()
             status?.text = "Connected"
             status?.textColor = UIColor.greenColor()
             self.join_btn.hidden = true
             self.disconnect.hidden = false
+            
+            
             
         }
         else{
@@ -59,7 +62,7 @@ class JoinViewController: UIViewController {
             return 0
         }
         else{
-            var interger = Int(word)
+            let interger = Int(word)
             return interger!
         }
         

@@ -146,7 +146,6 @@
 				48F21C6A1BDEB7DE00CBFBE8 /* Info.plist */,
 				48F21C671BDEB7DE00CBFBE8 /* LaunchScreen.storyboard */,
 				48F21C651BDEB7DE00CBFBE8 /* Assets.xcassets */,
-				48F21C5C1BDEB7DD00CBFBE8 /* AppDelegate.swift */,
 				481E62F21BDFE89500B4E9DF /* RemoteControl-Bridging-Header.h */,
 			);
 			name = SupportingFiles;
@@ -160,6 +159,7 @@
 				48F21C951BDEB9EE00CBFBE8 /* DevicesViewController.swift */,
 				48F21C971BDEBA6900CBFBE8 /* SettingViewController.swift */,
 				48F21C991BDEC2D500CBFBE8 /* RemoteControlBrain.swift */,
+				48F21C5C1BDEB7DD00CBFBE8 /* AppDelegate.swift */,
 			);
 			name = SourceCodes;
 			sourceTree = "<group>";
