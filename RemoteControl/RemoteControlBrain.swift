@@ -28,7 +28,7 @@ class RemoteControlBrain
     {
         tcpclient = TCPClient(addr: addr,port: port)
         
-        var (success,error)=tcpclient!.connect(timeout: 1)
+        let (success,error)=tcpclient!.connect(timeout: 1)
         if success{
             
             if underDevelopment{
@@ -90,29 +90,46 @@ class RemoteControlBrain
     
     func readmsgfromserver(msglength:Int)->String{
         let int_msg = tcpclient?.read(msglength)
+        
         if int_msg!.isEmpty {
             if underDevelopment{
                 print("The funtion readmsgfromServer is wrong")
             }
             return "no message recieved"
-        }
-        else{
-             let msg = String(int_msg)
+            
+            
+        }else{
+            var msg = " "
+            
+            for x in int_msg!{
+                 msg.append((UnicodeScalar(x)))
+            }
+            
+            if underDevelopment{
+                print("The real message from the server is \(int_msg)")
+                print("the converted message is \(msg)")
+                print(msg)
+            }
+            
+            
             return msg
+            }
         }
-    }
-    
     
     func firstVerification(){
         tcpclient?.send(str: "iam:\(getclientID())")
-        let msg = readmsgfromserver(12)
+        let msg = readmsgfromserver(7)
         
-        if msg == "Success"{
+        if msg == " success"{
             clientNameVerified = true
         }else{
             clientNameVerified = false
+            print("ClientnameVerification is still false")
         }
         
     }
-    
+
 }
+    
+    
+
