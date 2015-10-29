@@ -140,9 +140,6 @@
 		48F21C8E1BDEB87E00CBFBE8 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				481E62F31BDFE89600B4E9DF /* ysocket.swift */,
-				481E62F41BDFE89600B4E9DF /* ytcpsocket.c */,
-				481E62F51BDFE89600B4E9DF /* ytcpsocket.swift */,
 				48F21C6A1BDEB7DE00CBFBE8 /* Info.plist */,
 				48F21C671BDEB7DE00CBFBE8 /* LaunchScreen.storyboard */,
 				48F21C651BDEB7DE00CBFBE8 /* Assets.xcassets */,
@@ -160,6 +157,9 @@
 				48F21C971BDEBA6900CBFBE8 /* SettingViewController.swift */,
 				48F21C991BDEC2D500CBFBE8 /* RemoteControlBrain.swift */,
 				48F21C5C1BDEB7DD00CBFBE8 /* AppDelegate.swift */,
+				481E62F31BDFE89600B4E9DF /* ysocket.swift */,
+				481E62F41BDFE89600B4E9DF /* ytcpsocket.c */,
+				481E62F51BDFE89600B4E9DF /* ytcpsocket.swift */,
 			);
 			name = SourceCodes;
 			sourceTree = "<group>";
@@ -449,6 +449,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RemoteControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = UDlab.Learning.RemoteControl;
@@ -463,6 +464,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RemoteControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = UDlab.Learning.RemoteControl;

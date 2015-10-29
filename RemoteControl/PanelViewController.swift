@@ -10,26 +10,40 @@ import UIKit
 
 class PanelViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    var mainBrain = RemoteControlBrain()
+    
+    private var redledOn = false
+    private var blueledOn = false
+    private var greenledOn = false
+    
+    @IBAction func red_action_btn(sender: UIButton) {
+        
+        if !redledOn{
+            updateParcelManager(ObjectName: "Red", ValueInt: 255)
+        }else{
+            updateParcelManager(ObjectName: "NRed", ValueInt: 0)
+        }
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func blue_action_btn(sender: UIButton) {
+        if !redledOn{
+            updateParcelManager(ObjectName: "Blue", ValueInt: 255)
+        }else{
+            updateParcelManager(ObjectName: "NBlue", ValueInt: 0)
+        }
+    }
+    @IBAction func green_action_btn(sender: UIButton) {
+        if !redledOn{
+            updateParcelManager(ObjectName: "Green", ValueInt: 255)
+        }else{
+            updateParcelManager(ObjectName: "NGreen", ValueInt: 0)
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private func updateParcelManager(ObjectName name:String, ValueInt value:Int){
+            
+            mainBrain.parcelManager(Message:"command", nameofObject: name, value: value)
+        
     }
-    */
-
 }
+

@@ -32,11 +32,13 @@ class JoinViewController: UIViewController {
             self.disconnect.hidden = true
         }
     }
-    @IBAction func join_btn(sender: UIButton) {
     
+    
+    @IBAction func join_btn(sender: UIButton) {
         
-        // in this funtion the connection to the tcp connection is initialised
-    mainBrain.starttcpConnection(address:stringChecking(ip_address.text!) ,Port:stringtoInt(port_input.text!) )
+        mainBrain.starttcpConnection(address:stringChecking(ip_address.text!) ,Port:stringtoInt(port_input.text!) )
+        
+        
         if mainBrain.isConnected{
             self.status.hidden = false
             mainBrain.firstVerification()
@@ -56,7 +58,7 @@ class JoinViewController: UIViewController {
         }
     }
     
-    
+    //function to change string to Integer
     private func stringtoInt(word : String) ->Int{
         if word.isEmpty{
             return 0
@@ -68,6 +70,7 @@ class JoinViewController: UIViewController {
         
     }
     
+    //funtion return "Empty" if the statement is empty avoid error!!
     private func stringChecking(word:String) -> String{
         if word.isEmpty{
             return "Empty"

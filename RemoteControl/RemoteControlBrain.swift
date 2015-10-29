@@ -13,7 +13,7 @@ import CoreMotion
 class RemoteControlBrain
 {
     
-    private var tcpclient = TCPClient?()
+    var tcpclient = TCPClient?()
     
     var underDevelopment = true
     
@@ -28,7 +28,7 @@ class RemoteControlBrain
     {
         tcpclient = TCPClient(addr: addr,port: port)
         
-        let (success,error)=tcpclient!.connect(timeout: 1)
+        var (success,error)=tcpclient!.connect(timeout: 1)
         if success{
             
             if underDevelopment{
@@ -52,19 +52,17 @@ class RemoteControlBrain
     
     
     //This function deals with the command send action from clientto the server
-    func sendcommandtoserver(Command command :String){
+    func parcelManager(Message msg :String , nameofObject name:String,value:Int ){
         
-        if clientNameVerified {
-            let comm_compiling:String = "command:\(command)/r/n"
-            tcpclient?.send(str: comm_compiling)
+            if msg == "iam"{
+                tcpclient!.send(str:"\(msg):\(name)")
+            }else
+                if msg == "command"{
+                        tcpclient!.send(str: "\(msg):\(name)=\(value)")
+                    }
         }
-        else{
-            firstVerification()
-            sleep(2)
-            tcpclient?.send(str: "command:\(command)/r/n")
-        }
-        
-    }
+    
+    
     
     func setClientID(name:String){
         if name.isEmpty{
@@ -88,8 +86,10 @@ class RemoteControlBrain
         
     }
     
+    
+    //Read the Message from the server with the length of msg expected
     func readmsgfromserver(msglength:Int)->String{
-        let int_msg = tcpclient?.read(msglength)
+        let int_msg = tcpclient!.read(msglength)
         
         if int_msg!.isEmpty {
             if underDevelopment{
@@ -107,20 +107,23 @@ class RemoteControlBrain
             
             if underDevelopment{
                 print("The real message from the server is \(int_msg)")
-                print("the converted message is \(msg)")
-                print(msg)
+                print("the converted message is:\(msg)")
+                
             }
             
+            //This is done because somehow the msg is having a space as the first character
+            let right_msg = String(msg.characters.dropFirst())
             
-            return msg
+            return right_msg
             }
         }
     
+    
     func firstVerification(){
-        tcpclient?.send(str: "iam:\(getclientID())")
+        self.parcelManager(Message: "iam", nameofObject: getclientID(),value: 0)
         let msg = readmsgfromserver(7)
         
-        if msg == " success"{
+        if msg == "success"{
             clientNameVerified = true
         }else{
             clientNameVerified = false
