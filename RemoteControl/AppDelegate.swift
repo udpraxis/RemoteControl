@@ -12,6 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    //form a variable of TCPClient
+    var tcpclient = TCPClient()
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -39,8 +42,61 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        var(success,_) = tcpclient.close()
+        //DEBUG _DELETE Before Relesing 
+        if success{
+            print("The client connection to the server is terminated")
+        }
+        else{
+            print("The client connection to the server is not terminated")
+        }
     }
     
+    func initiateTCPconnection(IPAddress addr : String, portnumber port:Int)
+    {
+        tcpclient = TCPClient(addr: addr, port: port)
+        
+        var(success,error) = tcpclient.connect(timeout: 1)
+        
+        //DEBUG
+        if success{
+            print("Connection is succesful")
+        }
+        else
+        {
+            print(error)
+        }
+    }
+    
+    func messageRecieveManager(lengthofthemessage msglength : Int)-> String{
+        let int_msg = tcpclient.read(msglength)
+        
+        if int_msg!.isEmpty {
+            return "no message recieved"
+        }else{
+            var msg = " "
+            
+            for x in int_msg!{
+                msg.append((UnicodeScalar(x)))
+            }
 
+            //This is done because somehow the msg is having a space as the first character
+            let right_msg = String(msg.characters.dropFirst())
+            
+            return right_msg
+        }
+    }
+    
+    func commandSendManager(Message msg :String , nameofObject name:String,value:Int){
+        if msg == "iam"{
+                tcpclient.send(str:"\(msg):\(name)")
+        }else if msg == "command"{
+            tcpclient.send(str: "\(msg):\(name)=\(value)")
+        }
+    }
 }
+
+
+
 
